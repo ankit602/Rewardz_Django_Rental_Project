@@ -38,6 +38,8 @@ python manage.py makemigrations
 python manage.py migrate
 
 ### 6. Start Server
+
+
 python manage.py runserver
 
 ### 7. Open in Browser  
