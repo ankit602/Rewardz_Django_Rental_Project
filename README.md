@@ -1,4 +1,3 @@
-# Rewardz_Django_Rental_Project
 # Student Book Rental System (Django)
 
 ## 📌 Overview
