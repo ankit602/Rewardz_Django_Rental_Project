@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="container mt-5" style="max-width: 550px;">
+
+    <div class="card shadow">
+        <div class="card-body">
+
+            <h3 class="text-primary fw-bold mb-3">Extend Rental</h3>
+
+            <p><strong>Book:</strong> {{ rental.book.title }}</p>
+            <p><strong>User:</strong> {{ rental.user.username }}</p>
+            <p><strong>Current End Date:</strong> {{ rental.end_date|date:"M d, Y" }}</p>
+            <p><strong>Current Fee:</strong> ₹{{ rental.total_fee }}</p>
+
+            <form method="POST">
+                {% csrf_token %}
+
+                <label class="form-label mt-3">Extend by (months)</label>
+                <input type="number" name="months" value="1" min="1" class="form-control">
+
+                <button class="btn btn-warning w-100 mt-4">Extend Rental</button>
+            </form>
+
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}

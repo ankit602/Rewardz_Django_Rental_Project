@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="container mt-4">
+    <h2 class="mb-3">📊 Rental Reports & Analysis</h2>
+
+    <table class="table table-striped table-bordered">
+        <thead class="table-dark">
+            <tr>
+                <th>Book Title</th>
+                <th>Total Times Rented</th>
+                <th>Average Pages</th>
+                <th>Total Revenue ($)</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {% for r in report %}
+            <tr>
+                <td>{{ r.book__title }}</td>
+                <td>{{ r.total_rented }}</td>
+                <td>{{ r.avg_pages|floatformat:0 }}</td>
+                <td>${{ r.total_revenue|default_if_none:0|floatformat:2 }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,6 @@
+Django
+requests
+pytz
+sqlparse
+asgiref
+tzdata

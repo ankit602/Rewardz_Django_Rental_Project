@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="container mt-4">
+
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="fw-bold text-primary">📚 Student Rental Dashboard</h2>
+        <a href="/start/" class="btn btn-primary btn-lg">+ Start New Rental</a>
+    </div>
+
+    <div class="card shadow-sm">
+        <div class="card-body p-0">
+            <table class="table table-striped table-hover mb-0">
+                <thead class="table-dark">
+                    <tr>
+                        <th>User</th>
+                        <th>Book</th>
+                        <th>Pages</th>
+                        <th>Start Date</th>
+                        <th>End Date</th>
+                        <th>Total Fee</th>
+                        <th>Recommendations</th>
+                        <th>Extend</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    {% for r in rentals %}
+                    <tr>
+                        <td class="fw-semibold">{{ r.user.username }}</td>
+                        <td>{{ r.book.title }}</td>
+                        <td>{{ r.book.pages }}</td>
+                        <td>{{ r.start_date|date:"M d, Y" }}</td>
+                        <td>{{ r.end_date|date:"M d, Y" }}</td>
+
+                        <td>
+                            {% if r.total_fee > 0 %}
+                                <span class="badge bg-danger fs-6">₹{{ r.total_fee }}</span>
+                            {% else %}
+                                <span class="badge bg-success fs-6">Free</span>
+                            {% endif %}
+                        </td>
+
+                        <!-- Recommendations column -->
+                        <td>
+                            <ul class="mb-0">
+                                {% for rec in r.recommendations %}
+                                    <li>{{ rec }}</li>
+                                {% empty %}
+                                    <li>No recs</li>
+                                {% endfor %}
+                            </ul>
+                        </td>
+
+                        <td>
+                            <a href="/extend/{{ r.id }}/" class="btn btn-warning btn-sm">Extend</a>
+                        </td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="8" class="text-center py-4 text-muted">
+                            No rentals yet. Start one!
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+
+            </table>
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}
